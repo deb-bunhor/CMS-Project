@@ -1,6 +1,14 @@
 <?php 
 
 
+function confirmQuery($result){
+    global $connection;
+    if(!$result){
+        die('QUERY INSERT ERROR'.mysqli_error($connection));
+    }
+}
+
+
 function insert_categories(){
     
     global $connection;
