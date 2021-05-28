@@ -41,8 +41,9 @@
                     <?php
                     while ($row = mysqli_fetch_assoc($select_cat_sidebar_query)) {
                         $cat_title = $row['cat_title'];
+                        $cat_id = $row['cat_id'];
 
-                        echo "<li class='col-lg-6' ><a href='#'>{$cat_title}</a></li>";
+                        echo "<li class='col-lg-6' ><a href='categories.php?cat_id=$cat_id'>{$cat_title}</a></li>";
                     }
                     ?>
                 </ul>
