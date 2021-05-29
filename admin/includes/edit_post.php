@@ -55,6 +55,7 @@ if (isset($_GET['p_id'])) {
         if(!$update_post){
             die("QUERY ERROR".mysqli_error($connection));
         }
+        header("Location: posts.php");
     }
 ?>
 
