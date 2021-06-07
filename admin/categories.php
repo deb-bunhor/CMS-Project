@@ -57,7 +57,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Category Title</th>
-                                        <th class="col-xs-3"></th>
+                                        <th colspan="2"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

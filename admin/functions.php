@@ -54,10 +54,8 @@ function select_categories(){
         echo "<tr>";
         echo "<td>{$cat_id}</td>";
         echo "<td>{$cat_title}</td>";
-        echo "<td>
-                <a href='categories.php?delete={$cat_id}'>Delete</a> | 
-                <a href='categories.php?edit={$cat_id}'>Edit</a>
-            </td>";
+        echo "<td> <a class='btn btn-primary' href='categories.php?edit={$cat_id}'>Edit</a> </td>";
+        echo "<td> <a class='btn btn-danger' href='categories.php?delete={$cat_id}'>Delete</a> </td>";
         echo "</tr>";
     }
 }

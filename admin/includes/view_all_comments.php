@@ -52,7 +52,7 @@
 
             echo "<td> $comment_status </td>";
 
-            
+
             $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
             $select_posts_title_query = mysqli_query($connection, $query);
             $row = mysqli_fetch_assoc($select_posts_title_query);

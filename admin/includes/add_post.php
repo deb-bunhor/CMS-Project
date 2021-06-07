@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
         <label for="post_category">Category</label>
-        <select name="post_category" id="post_category">
+        <select class="btn btn-primary" name="post_category" id="post_category">
         <?php 
                 $query = "SELECT * FROM categories ";
                 $select_cat= mysqli_query($connection, $query);

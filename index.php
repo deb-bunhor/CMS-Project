@@ -50,9 +50,6 @@
                 <hr>
         
             <?php } } ?>
-
-
-
         </div>
 
         <!-- Blog Sidebar Widgets Column -->
