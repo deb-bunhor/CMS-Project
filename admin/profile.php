@@ -37,10 +37,12 @@ if(isset($_POST['update_profile'])){
 
     $query = "UPDATE  users SET user_firstname='{$user_firstname}', user_lastname='{$user_lastname}', 
     user_role='{$user_role}', user_username='{$user_username}', user_password='{$user_password}', 
-    user_email='{$user_email}', user_image='{$user_image}' WHERE user_id=$user_id ";
+    user_email='{$user_email}', user_image='{$user_image}' WHERE user_username='{$username}' ";
     $update_user = mysqli_query($connection, $query);
     confirmQuery($update_user);
-    header('location: profile.php');
+
+    $_SESSION['username'] = $user_username;
+    
 }
 
 
@@ -59,7 +61,7 @@ if(isset($_POST['update_profile'])){
                 <div class="col-lg-12">
                     <h1 class="page-header">
                         Welcome to admin
-                        <small>Author</small>
+                        <small><?php echo $user_username; ?></small>
                     </h1>
 
 
