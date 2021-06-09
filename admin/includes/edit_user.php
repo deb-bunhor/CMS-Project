@@ -51,12 +51,23 @@
         <input type="text" class="form-control" name="user_lastname" value="<?php echo $user_lastname; ?>">
     </div>
     <div class="form-group">
+
+
+
         <label for="post_category">Role</label>
         <select class="btn btn-primary" name="user_role" id="">
-            <option value="subscriber">--Select Options--</option>
-            <option value="admin">admin</option>
-            <option value="subscriber">subscriber</option>
+            <option value="subscriber"><?php echo $user_role; ?></option>
+            <?php  
+                if($user_role == 'admin'){
+                    echo '<option value="subscriber">subscriber</option>';
+                }else{
+                    echo '<option value="admin">admin</option>';
+                }
+            ?> 
         </select>
+
+
+
     </div>
     <div class="form-group" >
         <label for="post_author">Username</label>
