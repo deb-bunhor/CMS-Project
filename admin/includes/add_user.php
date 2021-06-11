@@ -19,6 +19,9 @@
 
         $add_user = mysqli_query($connection, $query);
         confirmQuery($add_user);
+        echo "<div class='alert alert-success col-sm-12'>";
+        echo "User Created" . "<a href='user.php'> / View Users</a>";
+        echo "</div>";
     }
 ?>
 

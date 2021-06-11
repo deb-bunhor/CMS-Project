@@ -22,10 +22,11 @@
                     $post_content = substr($row['post_content'],0,200). " ...";
                     $post_status = $row['post_status'];
 
-                    if($post_status !== 'Published'){
-                        echo "<h1> NO Post here </h1>";
-                    }else{
+                    
+                        
+                    
             ?>
+                <?php if($post_status == 'published') : ?>
                 <h1 class="page-header">
                 Page Heading
                 <small>Secondary Text</small>
@@ -48,8 +49,8 @@
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-        
-            <?php } } ?>
+                <?php endif ?>
+            <?php } ?>
         </div>
 
         <!-- Blog Sidebar Widgets Column -->

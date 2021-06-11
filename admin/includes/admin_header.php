@@ -5,7 +5,7 @@
 
 <?php
 
-if(!isset($_SESSION['user_role'])){
+if (!isset($_SESSION['user_role'])) {
     header("Location: ../index.php");
 }
 
@@ -28,6 +28,7 @@ if(!isset($_SESSION['user_role'])){
 
     <title>Admin</title>
 
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -36,6 +37,9 @@ if(!isset($_SESSION['user_role'])){
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="css/summernote.css">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,6 +47,7 @@ if(!isset($_SESSION['user_role'])){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 

@@ -87,10 +87,27 @@ if (isset($_GET['p_id'])) {
         <label for="post_author">Post Author</label>
         <input type="text" class="form-control" name="author" value="<?php echo $post_author; ?>">
     </div>
+
+
     <div class="form-group">
+    <select name="post_status" id="">
+        <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
+        <?php  
+        if($post_status == 'published'){
+            echo "<option value='draft'>Draft</option>";
+        }else {
+            echo "<option value='published'>Publish</option>";
+        }
+        ?>
+    </select>
+    </div>
+
+
+
+    <!-- <div class="form-group">
         <label for="post_status">Post Status</label>
         <input type="text" class="form-control" name="post_status" value="<?php echo $post_status; ?>">
-    </div>
+    </div> -->
     <div class="form-group">
         <img width="100px" src="../images/<?php echo $post_image; ?>" alt="">
         <input type="file" class="form-control" name="image">
@@ -101,9 +118,7 @@ if (isset($_GET['p_id'])) {
     </div>
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="#" cols="30" rows="10" value="#">
-        <?php echo $post_content; ?>
-        </textarea>
+        <textarea class="form-control" id="summernote" name="post_content"  cols="30" rows="10" value="#"><?php echo $post_content; ?></textarea>
     </div>
     <div class="form-group">
         <input class="btn btn-primary" type="submit" name="update_post" value="Update Post">
