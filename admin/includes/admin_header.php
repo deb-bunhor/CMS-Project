@@ -12,9 +12,6 @@ if (!isset($_SESSION['user_role'])) {
 ?>
 
 
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,6 +24,7 @@ if (!isset($_SESSION['user_role'])) {
     <meta name="author" content="">
 
     <title>Admin</title>
+    
 
 
     <!-- Bootstrap Core CSS -->
