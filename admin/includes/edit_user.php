@@ -30,8 +30,17 @@
         $user_email = $_POST['user_email'];
         move_uploaded_file($user_image_temp, "../images/$user_image");
 
+        $query = " SELECT * FROM users ";
+        $select_randsalt_query = mysqli_query($connection, $query);
+        if(!$select_randsalt_query){
+            die("QUERY FAILED".mysqli_error($connection));
+        }
+        $row = mysqli_fetch_array($select_randsalt_query);
+        $salt = $row['randSalt'];
+        $hashed_password = crypt($user_password, $salt);
+
         $query = "UPDATE  users SET user_firstname='{$user_firstname}', user_lastname='{$user_lastname}', 
-        user_role='{$user_role}', user_username='{$user_username}', user_password='{$user_password}', 
+        user_role='{$user_role}', user_username='{$user_username}', user_password='{$hashed_password}', 
         user_email='{$user_email}', user_image='{$user_image}' WHERE user_id=$user_id ";
         $update_user = mysqli_query($connection, $query);
         confirmQuery($update_user);
@@ -56,7 +65,7 @@
 
         <label for="post_category">Role</label>
         <select class="btn btn-primary" name="user_role" id="">
-            <option value="subscriber"><?php echo $user_role; ?></option>
+            <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
             <?php  
                 if($user_role == 'admin'){
                     echo '<option value="subscriber">subscriber</option>';
