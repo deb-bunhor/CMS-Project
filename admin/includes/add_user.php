@@ -1,5 +1,6 @@
 <?php
     if(isset($_POST['add_user'])){
+        var_dump($_FILES);
         $user_firstname = $_POST['user_firstname'];
         $user_lastname = $_POST['user_lastname'];
         $user_role = $_POST['user_role'];
@@ -18,7 +19,7 @@
         '{$user_password}', '{$user_email}', '{$user_image}')";
 
         $add_user = mysqli_query($connection, $query);
-        confirmQuery($add_user);
+        // confirmQuery($add_user);
         echo "<div class='alert alert-success col-sm-12'>";
         echo "User Created" . "<a href='user.php'> / View Users</a>";
         echo "</div>";

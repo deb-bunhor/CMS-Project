@@ -1,5 +1,8 @@
 <?php
 if (isset($_POST['create_post'])) {
+    var_dump($_POST);
+    var_dump($_FILES);
+
     $post_title = $_POST['title'];
     $post_author = $_POST['author'];
     $post_category_id = $_POST['post_category'];
