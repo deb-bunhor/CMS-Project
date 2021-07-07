@@ -2,6 +2,13 @@
 
 <div id="wrapper">
 
+
+
+
+
+
+
+
     <!-- Navigation -->
     <?php include 'includes/admin_navigation.php' ?>
 
@@ -15,7 +22,7 @@
                         <small><?php echo $_SESSION['username'] ?></small>
                     </h1>
 
-
+                   
                 </div>
             </div>
             <!-- /.row -->

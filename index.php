@@ -9,19 +9,19 @@
 
     <div class="row">
         <!-- Blog Entries Column -->
+
         <div class="col-md-8">
             <?php
-
+            $per_page = 5;
             if(isset($_GET['page'])){
                $page = $_GET['page'];
             }else{
                 $page = "";
             }
-
-            if($page == "" || $page = 1){
+            if($page == "" || $page == 1){
                 $page_1 = 0;
             }else{
-                $page_1 = ($page * 5) - 5;
+                $page_1 = ($page * $per_page) - $per_page;
             }
 
 
@@ -33,12 +33,12 @@
                 die("Query Failed".mysqli_error($connection));
             }
 
-            $count = ceil($count / 5);
+            $count = ceil($count / $per_page);
 
 
 
 
-            $query = "SELECT * FROM posts  LIMIT $page_1, 5 ";
+            $query = "SELECT * FROM posts LIMIT $page_1, $per_page ";
             $select_all_posts_query = mysqli_query($connection, $query);
             while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                 $post_id = $row['post_id'];
@@ -54,7 +54,6 @@
 
             ?>
                 <?php if ($post_status == 'published') : ?>
-                <h1><?php echo $count  ?></h1>
                     <h1 class="page-header">
                         Page Heading
                         <small>Secondary Text</small>
@@ -98,7 +97,12 @@
     <ul class="pager">
         <?php
             for($i = 1; $i <= $count; $i++){
+                if($i == $page){
+                    echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+                }else{
+
                 echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+                }
             }
         ?>
     </ul>

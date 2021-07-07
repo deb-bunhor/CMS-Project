@@ -1,8 +1,8 @@
-// $(document).ready(function() {
-//     $('#summernote').summernote({
-//         // code here
-//     });
-//   });
+$(document).ready(function() {
+    $('#summernote').summernote({
+        // code here
+    });
+  });
 
 $(document).ready(function(){
     $('#selectAllBoxes').click(function(event){
@@ -24,3 +24,15 @@ $("body").prepend(div_box);
 $('#load-screen').delay(700).fadeOut(600, function(){
     $(this).remove();
 });
+
+function loadUserOnline(){
+    $.get("functions.php?onlineusers=result", function(data){
+        $(".usersonline").text(data);
+    });
+}
+
+setInterval(function(){
+    loadUserOnline();
+},500);
+
+
