@@ -28,7 +28,7 @@ if (isset($_POST['checkBoxArray'])) {
                 $query = "SELECT * FROM posts WHERE post_id = '{$postValueID}'";
                 $select_post_query = mysqli_query($connection, $query);
 
-                while($row = mysqli_fetch_array($select_post_query)){
+                while ($row = mysqli_fetch_array($select_post_query)) {
                     $post_title = $row['post_title'];
                     $post_category_id = $row['post_category_id'];
                     $post_date = $row['post_date'];
@@ -42,8 +42,8 @@ if (isset($_POST['checkBoxArray'])) {
                 $query .= "VALUES($post_category_id, '$post_title','$post_author', 
                 '$post_date', '$post_status', '$post_image', '$post_tags', '$post_content')";
                 $copy_query = mysqli_query($connection, $query);
-                if(!$copy_query){
-                    die("Query Failed".mysqli_error($connection));
+                if (!$copy_query) {
+                    die("Query Failed" . mysqli_error($connection));
                 }
                 break;
         }
@@ -72,7 +72,7 @@ if (isset($_POST['checkBoxArray'])) {
             <tr>
                 <th><input id="selectAllBoxes" type="checkbox"></th>
                 <th>ID</th>
-                <th>Author</th>
+                <th>Users</th>
                 <th>Title</th>
                 <th>Categories</th>
                 <th>Status</th>
@@ -95,6 +95,7 @@ if (isset($_POST['checkBoxArray'])) {
 
                 $post_id = $row['post_id'];
                 $post_author = $row['post_author'];
+                $post_user = $row['post_user'];
                 $post_title = $row['post_title'];
                 $post_category_id = $row['post_category_id'];
                 $post_status = $row['post_status'];
@@ -109,7 +110,13 @@ if (isset($_POST['checkBoxArray'])) {
                 <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
             <?php
                 echo "<td> $post_id </td>";
-                echo "<td> $post_author </td>";
+
+                if (!empty($post_author)) {
+                    echo "<td> $post_author </td>";
+                } elseif (!empty($post_user)) {
+                    echo "<td> $post_user </td>";
+                }
+
                 echo "<td> $post_title </td>";
 
 
@@ -137,12 +144,12 @@ if (isset($_POST['checkBoxArray'])) {
                 $query = " SELECT * FROM comments WHERE comment_post_id = $post_id ";
                 $send_comment_query = mysqli_query($connection, $query);
                 $row = mysqli_fetch_array($send_comment_query);
-                if($row){
+                if ($row) {
                     $comment_id = $row['comment_id'];
-                }else{
+                } else {
                     $comment_id = "";
                 }
-                
+
                 $count_comments = mysqli_num_rows($send_comment_query);
                 echo "<td> <a href='post_comments.php?id=$post_id'>$count_comments</a> </td>";
 
@@ -173,7 +180,7 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['reset'])) {
     $the_post_id = $_GET['reset'];
-    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =".mysqli_real_escape_string($connection, $_GET['reset'])."";
+    $query = "UPDATE posts SET post_views_count = 0 WHERE post_id =" . mysqli_real_escape_string($connection, $_GET['reset']) . "";
     $reset_query = mysqli_query($connection, $query);
     if (!$reset_query) {
         die('QUERY ERROR' . mysqli_error($connection));

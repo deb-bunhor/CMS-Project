@@ -1,10 +1,10 @@
 <?php
 if (isset($_POST['create_post'])) {
-    var_dump($_POST);
-    var_dump($_FILES);
+    // var_dump($_POST);
+    // var_dump($_FILES);
 
     $post_title = $_POST['title'];
-    $post_author = $_POST['author'];
+    $post_users = $_POST['post_users'];
     $post_category_id = $_POST['post_category'];
     $post_status = $_POST['post_status'];
 
@@ -18,8 +18,8 @@ if (isset($_POST['create_post'])) {
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
     $query = "INSERT INTO posts(post_category_id, post_title, 
-        post_author, post_date, post_image, post_content, post_tags, post_status) ";
-    $query .= "VALUES ('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}',
+        post_user, post_date, post_image, post_content, post_tags, post_status) ";
+    $query .= "VALUES ('{$post_category_id}', '{$post_title}', '{$post_users}', now(), '{$post_image}',
         '{$post_content}', '{$post_tags}', '{$post_status}')";
 
     $create_post_query = mysqli_query($connection, $query);
@@ -57,10 +57,30 @@ if (isset($_POST['create_post'])) {
 
         </select>
     </div>
+
     <div class="form-group">
+        <label for="users">Users</label>
+        <select class="btn btn-primary" name="post_users" id="post_category">
+            <?php
+            $query = "SELECT * FROM users ";
+            $select_users = mysqli_query($connection, $query);
+            // confirmQuery($select_cat);
+
+            while ($row = mysqli_fetch_assoc($select_users)) {
+                $user_id = $row['user_id'];
+                $user_username = $row['user_username'];
+                echo "<option value='{$user_username}'>{$user_username}</option>";
+            }
+
+            ?>
+
+        </select>
+    </div>
+
+    <!-- <div class="form-group">
         <label for="post_author">Post Author</label>
         <input type="text" class="form-control" name="author">
-    </div>
+    </div> -->
     <div class="form-group">
         <select name="post_status" class="form-control">
             <option value="draft">--Post Status Option--</option>
