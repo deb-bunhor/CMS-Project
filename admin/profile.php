@@ -25,7 +25,7 @@ if(isset($_POST['update_profile'])){
     $user_id = $_POST['user_id'];
     $user_firstname = $_POST['user_firstname'];
     $user_lastname = $_POST['user_lastname'];
-    $user_role = $_POST['user_role'];
+    // $user_role = $_POST['user_role'];
     $user_username = $_POST['user_username'];
 
     $user_image = $_FILES['image']['name'];
@@ -36,7 +36,7 @@ if(isset($_POST['update_profile'])){
     move_uploaded_file($user_image_temp, "../images/$user_image");
 
     $query = "UPDATE  users SET user_firstname='{$user_firstname}', user_lastname='{$user_lastname}', 
-    user_role='{$user_role}', user_username='{$user_username}', user_password='{$user_password}', 
+     user_username='{$user_username}', user_password='{$user_password}', 
     user_email='{$user_email}', user_image='{$user_image}' WHERE user_username='{$username}' ";
     $update_user = mysqli_query($connection, $query);
     confirmQuery($update_user);
@@ -100,7 +100,7 @@ if(isset($_POST['update_profile'])){
                         </div>
                         <div class="form-group">
                             <label for="post_status">Password</label>
-                            <input type="text" class="form-control" name="user_password" value="<?php echo $user_password; ?>">
+                            <input autocomplete="off" type="text" class="form-control" name="user_password" >
                         </div>
                         <div class="form-group">
                             <label for="post_image">User Image</label>

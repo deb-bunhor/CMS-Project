@@ -27,7 +27,7 @@
             $comment_status = $row['comment_status'];
             $comment_date = $row['comment_date'];
 
-        
+
 
             echo "<tr>";
             echo "<td> $comment_id </td>";
@@ -55,11 +55,18 @@
 
             $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
             $select_posts_title_query = mysqli_query($connection, $query);
-            $row = mysqli_fetch_assoc($select_posts_title_query);
-            $post_id = $row['post_id'];
-            $post_title = $row['post_title'];
-            echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
+            $row_post = mysqli_fetch_assoc($select_posts_title_query);
 
+            if ($row_post) {
+                $post_id = $row_post['post_id'];
+                $post_title = $row_post['post_title'];
+            } else {
+                $post_id = "";
+                $post_title = "";
+            }
+
+            echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a></td>";
+            // echo "<td></td>";
             echo "<td> $comment_date </td>";
             echo "<td> <a href='comments.php?approve={$comment_id}'> Approve </a>​​ </td>";
             echo "<td>  <a href='comments.php?unapprove={$comment_id}'> Unapprove </a>​​";

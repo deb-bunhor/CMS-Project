@@ -1,6 +1,6 @@
 <?php
     if(isset($_POST['add_user'])){
-        var_dump($_FILES);
+        
         $user_firstname = $_POST['user_firstname'];
         $user_lastname = $_POST['user_lastname'];
         $user_role = $_POST['user_role'];
@@ -12,6 +12,9 @@
         $user_password = $_POST['user_password'];
         $user_email = $_POST['user_email'];
         move_uploaded_file($user_image_temp, "../images/$user_image");
+
+        $user_password = password_hash($user_password, PASSWORD_DEFAULT, array('cost' => 12));
+
 
         $query = "INSERT INTO users(user_firstname, user_lastname, user_role,
         user_username, user_password, user_email, user_image) ";
