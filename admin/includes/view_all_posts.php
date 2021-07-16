@@ -29,17 +29,26 @@ if (isset($_POST['checkBoxArray'])) {
                 $select_post_query = mysqli_query($connection, $query);
 
                 while ($row = mysqli_fetch_array($select_post_query)) {
-                    $post_title = $row['post_title'];
-                    $post_category_id = $row['post_category_id'];
-                    $post_date = $row['post_date'];
-                    $post_author = $row['post_author'];
-                    $post_status = $row['post_status'];
-                    $post_image = $row['post_image'];
-                    $post_tags = $row['post_tags'];
-                    $post_content = $row['post_content'];
+                    $post_title         = $row['post_title'];
+                    $post_category_id   = $row['post_category_id'];
+                    $post_date          = $row['post_date'];
+                    $post_author        = $row['post_author'];
+                    $post_user          = $row['post_user'];
+                    $post_status        = $row['post_status'];
+                    $post_image         = $row['post_image'];
+                    $post_tags          = $row['post_tags'];
+                    $post_content       = $row['post_content'];
                 }
-                $query = " INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_status, post_image, post_tags, post_content) ";
-                $query .= "VALUES($post_category_id, '$post_title','$post_author', 
+
+
+                if(empty($post_tags)){
+                    $post_tags = "No tags"; 
+                }
+
+
+
+                $query = " INSERT INTO posts(post_category_id, post_title, post_author, post_user, post_date, post_status, post_image, post_tags, post_content) ";
+                $query .= "VALUES($post_category_id, '$post_title','$post_author', '$post_user',
                 '$post_date', '$post_status', '$post_image', '$post_tags', '$post_content')";
                 $copy_query = mysqli_query($connection, $query);
                 if (!$copy_query) {
@@ -89,8 +98,17 @@ if (isset($_POST['checkBoxArray'])) {
         <tbody>
 
             <?php
-            $query = "SELECT * FROM posts ORDER BY post_id DESC";
+            //$query = "SELECT * FROM posts ORDER BY post_id DESC";
+            $query = "SELECT posts.post_id,posts.post_author, posts.post_user, posts.post_title, posts.post_category_id, posts.post_status, posts.post_image, ";
+            $query .= "posts.post_tags, posts.post_comment_count, posts.post_date, posts.post_views_count, categories.cat_id, categories.cat_title ";
+            $query .= " FROM posts ";
+            $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id ";
+            $query .= "ORDER BY posts.post_id DESC";
+
             $select_posts_query = mysqli_query($connection, $query);
+            if(!$select_posts_query){
+                die("QUERY ERROR".mysqli_error($connection));
+            }
             while ($row = mysqli_fetch_array($select_posts_query)) {
 
                 $post_id = $row['post_id'];
@@ -104,7 +122,8 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_comment_count = $row['post_comment_count'];
                 $post_date = $row['post_date'];
                 $post_views_count = $row['post_views_count'];
-
+                $cat_id = $row['cat_id'];
+                $cat_title = $row['cat_title'];
                 echo "<tr>";
             ?>
                 <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $post_id; ?>'></td>
@@ -126,13 +145,13 @@ if (isset($_POST['checkBoxArray'])) {
                 $select_cat = mysqli_query($connection, $query);
                 // confirmQuery($select_cat);
 
-                while ($row = mysqli_fetch_assoc($select_cat)) {
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];
+                // while ($row = mysqli_fetch_assoc($select_cat)) {
+                //     $cat_id = $row['cat_id'];
+                //     $cat_title = $row['cat_title'];
 
 
                     echo "<td> {$cat_title} </td>";
-                }
+                //}
 
 
                 echo "<td> $post_status </td>";

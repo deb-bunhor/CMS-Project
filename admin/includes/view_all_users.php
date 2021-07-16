@@ -28,7 +28,7 @@
             $user_image = $row['user_image'];
             $user_role = $row['user_role'];
             $user_randSalt = $row['randSalt'];
-        
+
 
             echo "<tr>";
             echo "<td> $user_id </td>";
@@ -52,7 +52,7 @@
 
             echo "<td> $user_firstname </td>";
 
-            
+
             // $query = "SELECT * FROM posts WHERE post_id = $comment_post_id";
             // $select_posts_title_query = mysqli_query($connection, $query);
             // $row = mysqli_fetch_assoc($select_posts_title_query);
@@ -100,13 +100,18 @@ if (isset($_GET['change_to_subscriber'])) {
 
 
 if (isset($_GET['delete'])) {
-    $user_id = $_GET['delete'];
-    $query = "DELETE FROM users WHERE user_id = {$user_id}";
-    $delete_user_query = mysqli_query($connection, $query);
-    if (!$delete_user_query) {
-        die('QUERY DELETE ERROR' . mysqli_error($connection));
+    if (isset($_SESSION['user_role'])) {
+       if ($_SESSION['user_role'] == 'admin') {
+
+            $user_id =$_GET['delete'];
+            $query = "DELETE FROM users WHERE user_id = {$user_id}";
+            $delete_user_query = mysqli_query($connection, $query);
+            if (!$delete_user_query) {
+                die('QUERY DELETE ERROR' . mysqli_error($connection));
+            }
+            header("Location: user.php");
+       }
     }
-    header("Location: user.php");
 }
 
 ?>

@@ -19,15 +19,30 @@
                         $select_all_cat_query = mysqli_query($connection, $query);
                         while($row = mysqli_fetch_assoc($select_all_cat_query)){
                             $cat_title = $row['cat_title'];
+                            $cat_id = $row['cat_id'];
 
-                            echo "<li><a href='#'>{$cat_title}</a></li>";
+                            $cat_class = '';
+                            $registration_class = '';
+
+                            $pageName = basename($_SERVER['PHP_SELF']);
+                            $registration = 'registration.php';
+                            if(isset($_GET['cat_id']) && $_GET['cat_id'] == $cat_id){
+                                $cat_class = 'active';
+                            }elseif($pageName == $registration){
+                                $registration_class = 'active';
+                            }
+
+                            echo "<li class='$cat_class'><a href='categories.php?cat_id=$cat_id'>{$cat_title}</a></li>";
                         }
                     ?>
                     <li>
                         <a href="admin">Admin</a>
                     </li>
                     <li>
-                        <a href="registration.php">Registration</a>
+                        <a class="<?php echo $registration_class; ?>" href="registration.php">Registration</a>
+                    </li>
+                    <li>
+                        <a href="contact.php">Contact</a>
                     </li>
                     <?php
                     if(isset($_SESSION['user_role'])){

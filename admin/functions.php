@@ -1,6 +1,15 @@
 <?php
 
 
+
+function escape($string){
+    global $connection;
+    return mysqli_real_escape_string($connection, trim(strip_tags($string)));
+}
+
+
+
+
 function users_online()
 {
     if (isset($_GET['onlineusers'])) {
@@ -119,4 +128,39 @@ function delete_categories()
         die('QUERY DELETE ERROR' . mysqli_error($connection));
     }
     header("Location: categories.php");
+}
+
+
+/* work on admin index page */
+function recordCount($table){
+    global $connection;
+    $query = "SELECT * FROM $table";
+    $select_all_post = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($select_all_post);
+    confirmQuery($result);
+    return $result;
+}
+
+function checkStatus($table, $column, $status){
+    global $connection;
+    $query = "SELECT * FROM $table WHERE $column = '$status' ";
+    $result = mysqli_query($connection, $query);
+    return mysqli_num_rows($result);
+}
+
+/**---------------- */
+
+function is_admin($username = ''){
+    global $connection;
+    $query = " SELECT user_role FROM users WHERE user_username = '$username' ";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+
+    $row = mysqli_fetch_array($result);
+
+    if($row['user_role'] == 'admin'){
+        return true;
+    }else{
+        return false;
+    }
 }

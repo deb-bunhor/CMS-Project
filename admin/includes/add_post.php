@@ -3,7 +3,7 @@ if (isset($_POST['create_post'])) {
     // var_dump($_POST);
     // var_dump($_FILES);
 
-    $post_title = $_POST['title'];
+    $post_title = escape($_POST['title']);
     $post_users = $_POST['post_users'];
     $post_category_id = $_POST['post_category'];
     $post_status = $_POST['post_status'];

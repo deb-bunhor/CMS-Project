@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <?php
 
 define("DB_HOST", "localhost");
